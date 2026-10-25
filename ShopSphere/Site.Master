@@ -1,0 +1,191 @@
+<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="ShopSphere.SiteMaster" %>
+
+<!DOCTYPE html>
+<html lang="en">
+<head runat="server">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%: Page.Title %> - ShopSphere</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="~/favicon.ico" />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <!-- Tailstore Template Stylesheets -->
+    <link rel="stylesheet" href="~/assets/css/styles.css" />
+    <link rel="stylesheet" href="~/assets/css/custom.css" />
+
+    <asp:ContentPlaceHolder ID="HeadContent" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body class="bg-gray-50 text-gray-900 font-sans min-h-screen flex flex-col justify-between">
+    <form runat="server">
+        <asp:ScriptManager runat="server">
+            <Scripts>
+                <%-- ASP.NET Framework Scripts --%>
+                <asp:ScriptReference Name="MsAjaxBundle" />
+                <asp:ScriptReference Name="jquery" />
+                <asp:ScriptReference Name="WebForms.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebForms.js" />
+                <asp:ScriptReference Name="WebUIValidation.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebUIValidation.js" />
+                <asp:ScriptReference Name="WebFormsBundle" />
+            </Scripts>
+        </asp:ScriptManager>
+
+        <!-- Header / Navigation Bar -->
+        <header class="bg-gray-dark sticky top-0 z-50 shadow-md">
+            <div class="container mx-auto flex justify-between items-center py-4 px-4 sm:px-6">
+                <!-- Left Section: Logo -->
+                <a runat="server" href="~/Default.aspx" class="flex items-center space-x-2">
+                    <img runat="server" src="~/assets/images/template-white-logo.png" alt="ShopSphere Logo" class="h-12 w-auto" />
+                </a>
+
+                <!-- Hamburger Menu Button (Mobile) -->
+                <div class="flex lg:hidden">
+                    <button type="button" id="hamburger" class="text-white focus:outline-none p-2 rounded hover:bg-gray-800" aria-label="Toggle Navigation">
+                        <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                        </svg>
+                    </button>
+                </div>
+
+                <!-- Center Section: Main Menu Links -->
+                <nav class="hidden lg:flex md:flex-grow justify-center">
+                    <ul class="flex justify-center space-x-6 text-white text-sm font-semibold tracking-wide">
+                        <li><a runat="server" href="~/Default.aspx" class="hover:text-primary transition-colors py-2">Home</a></li>
+                        <li><a runat="server" href="~/Shop.aspx" class="hover:text-primary transition-colors py-2">Shop</a></li>
+                        <li><a runat="server" href="~/ScreenTime.aspx" class="hover:text-primary transition-colors py-2">Instagram Analyzer</a></li>
+                        <li><a runat="server" href="~/ElectricityBill.aspx" class="hover:text-primary transition-colors py-2">Electricity Bill</a></li>
+                        <li><a runat="server" href="~/Records.aspx" class="hover:text-primary transition-colors py-2">Database Records (GridView)</a></li>
+                        <li><a runat="server" href="~/Error404.aspx" class="hover:text-primary transition-colors py-2">404 Page</a></li>
+                    </ul>
+                </nav>
+
+                <!-- Right Section: Auth & Role Info -->
+                <div class="hidden lg:flex items-center space-x-3 text-sm">
+                    <% if (Session["Username"] != null) { %>
+                        <div class="flex items-center space-x-2 bg-gray-900 border border-gray-700 text-white px-3 py-1.5 rounded-full">
+                            <i class="fa-solid fa-user-circle text-primary text-base"></i>
+                            <span class="font-medium"><%= Session["Username"] %></span>
+                            <span class="bg-primary text-white text-xs px-2 py-0.5 rounded-full font-bold uppercase"><%= Session["Role"] %></span>
+                        </div>
+                        <a runat="server" href="~/Logout.aspx" class="bg-red-600 border border-red-600 hover:bg-transparent text-white hover:text-red-400 font-semibold px-4 py-2 rounded-full transition-all">Logout</a>
+                    <% } else { %>
+                        <a runat="server" href="~/Register.aspx" class="bg-transparent border border-primary text-white hover:bg-primary font-semibold px-4 py-2 rounded-full transition-all">Register</a>
+                        <a runat="server" href="~/Login.aspx" class="bg-primary border border-primary hover:bg-transparent text-white hover:text-primary font-semibold px-4 py-2 rounded-full transition-all">Login</a>
+                    <% } %>
+                </div>
+            </div>
+
+            <!-- Mobile Navigation Drawer -->
+            <div id="mobile-menu" class="mobile-menu hidden lg:hidden bg-gray-900 text-white px-6 py-4 border-t border-gray-800">
+                <ul class="flex flex-col space-y-3 font-semibold">
+                    <li><a runat="server" href="~/Default.aspx" class="block hover:text-primary py-1">Home</a></li>
+                    <li><a runat="server" href="~/Shop.aspx" class="block hover:text-primary py-1">Shop</a></li>
+                    <li><a runat="server" href="~/ScreenTime.aspx" class="block hover:text-primary py-1">Instagram Analyzer</a></li>
+                    <li><a runat="server" href="~/ElectricityBill.aspx" class="block hover:text-primary py-1">Electricity Bill</a></li>
+                    <li><a runat="server" href="~/Records.aspx" class="block hover:text-primary py-1">Database Records (GridView)</a></li>
+                    <li><a runat="server" href="~/Error404.aspx" class="block hover:text-primary py-1">404 Page</a></li>
+                    <li class="pt-2 border-t border-gray-800 flex flex-col space-y-2">
+                        <% if (Session["Username"] != null) { %>
+                            <div class="text-sm text-gray-300">Signed in as <b><%= Session["Username"] %></b> (<%= Session["Role"] %>)</div>
+                            <a runat="server" href="~/Logout.aspx" class="bg-red-600 text-center text-white py-2 rounded-full font-semibold">Logout</a>
+                        <% } else { %>
+                            <a runat="server" href="~/Login.aspx" class="bg-primary text-center text-white py-2 rounded-full font-semibold">Login</a>
+                            <a runat="server" href="~/Register.aspx" class="border border-primary text-center text-white py-2 rounded-full font-semibold">Register</a>
+                        <% } %>
+                    </li>
+                </ul>
+            </div>
+        </header>
+
+        <!-- Main Body Content Placeholder -->
+        <main class="flex-grow">
+            <asp:ContentPlaceHolder ID="MainContent" runat="server">
+            </asp:ContentPlaceHolder>
+        </main>
+
+        <!-- Tailstore Professional Footer -->
+        <footer class="bg-gray-dark text-gray-400 text-sm mt-16 border-t border-gray-800">
+            <div class="container mx-auto px-4 py-12">
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                    <!-- Column 1: Brand Info -->
+                    <div class="space-y-4">
+                        <img runat="server" src="~/assets/images/template-white-logo.png" alt="ShopSphere Logo" class="h-10 w-auto" />
+                        <p class="text-gray-400 text-sm leading-relaxed">
+                            ShopSphere is a full-stack college PBL project combining modern e-commerce storefront design with practical ASP.NET Web Forms computing modules.
+                        </p>
+                        <div class="flex space-x-3 text-white">
+                            <span class="w-8 h-8 rounded-full bg-gray-800 flex items-center justify-center hover:bg-primary transition"><i class="fa-brands fa-facebook-f"></i></span>
+                            <span class="w-8 h-8 rounded-full bg-gray-800 flex items-center justify-center hover:bg-primary transition"><i class="fa-brands fa-instagram"></i></span>
+                            <span class="w-8 h-8 rounded-full bg-gray-800 flex items-center justify-center hover:bg-primary transition"><i class="fa-brands fa-github"></i></span>
+                        </div>
+                    </div>
+
+                    <!-- Column 2: Quick Links -->
+                    <div>
+                        <h4 class="text-white font-bold text-base mb-4 uppercase tracking-wider">Quick Navigation</h4>
+                        <ul class="space-y-2">
+                            <li><a runat="server" href="~/Default.aspx" class="hover:text-primary transition">Home Storefront</a></li>
+                            <li><a runat="server" href="~/Shop.aspx" class="hover:text-primary transition">Product Catalog</a></li>
+                            <li><a runat="server" href="~/Records.aspx" class="hover:text-primary transition">GridView Database Viewer</a></li>
+                            <li><a runat="server" href="~/Error404.aspx" class="hover:text-primary transition">404 Error Page</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- Column 3: Assignment Modules -->
+                    <div>
+                        <h4 class="text-white font-bold text-base mb-4 uppercase tracking-wider">PBL Modules</h4>
+                        <ul class="space-y-2">
+                            <li><a runat="server" href="~/Login.aspx" class="hover:text-primary transition">Three-Role Authentication</a></li>
+                            <li><a runat="server" href="~/Register.aspx" class="hover:text-primary transition">Database User Registration</a></li>
+                            <li><a runat="server" href="~/ScreenTime.aspx" class="hover:text-primary transition">Instagram Screen Time Analyzer</a></li>
+                            <li><a runat="server" href="~/ElectricityBill.aspx" class="hover:text-primary transition">Electricity Bill Calculator</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- Column 4: College Project Details -->
+                    <div>
+                        <h4 class="text-white font-bold text-base mb-4 uppercase tracking-wider">College Information</h4>
+                        <p class="text-xs text-gray-400 mb-2 font-semibold">ITM SLS BU School of Computer Science & Engineering</p>
+                        <p class="text-xs text-gray-400 mb-1">B.Tech Semester-3 (Academic Year 2026-27)</p>
+                        <p class="text-xs text-gray-400 mb-1">PBL Component: ASP.NET Web Forms & C#</p>
+                        <p class="text-xs text-gray-400">Database: Microsoft SQL Server & ADO.NET</p>
+                        <div class="mt-4 p-3 bg-gray-900 rounded border border-gray-800 text-xs">
+                            <span class="text-primary font-bold">Demo Accounts:</span><br />
+                            admin / admin123<br />
+                            student / stud123<br />
+                            faculty / fac123
+                        </div>
+                    </div>
+                </div>
+
+                <div class="border-t border-gray-800 mt-10 pt-6 flex flex-col md:flex-row justify-between items-center text-xs text-gray-500">
+                    <p>&copy; <%: DateTime.Now.Year %> ShopSphere PBL Project. Second-Year B.Tech Computer Science.</p>
+                    <p>Designed with Tailstore &bull; Powered by ASP.NET Web Forms &amp; SQL Server</p>
+                </div>
+            </div>
+        </footer>
+    </form>
+
+    <!-- Template JavaScript -->
+    <script>
+        // Responsive mobile menu toggle
+        document.addEventListener('DOMContentLoaded', function () {
+            var hamburger = document.getElementById('hamburger');
+            var mobileMenu = document.getElementById('mobile-menu');
+            if (hamburger && mobileMenu) {
+                hamburger.addEventListener('click', function () {
+                    mobileMenu.classList.toggle('hidden');
+                });
+            }
+        });
+    </script>
+</body>
+</html>

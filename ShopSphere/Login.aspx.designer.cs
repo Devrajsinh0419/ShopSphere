@@ -1,0 +1,16 @@
+namespace ShopSphere
+{
+    public partial class Login
+    {
+        protected global::System.Web.UI.WebControls.Panel pnlMessage;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divAlertBox;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl iconAlert;
+        protected global::System.Web.UI.WebControls.Label lblMessage;
+        protected global::System.Web.UI.WebControls.TextBox txtUsername;
+        protected global::System.Web.UI.WebControls.TextBox txtPassword;
+        protected global::System.Web.UI.WebControls.Button btnLogin;
+        protected global::System.Web.UI.WebControls.Button btnFillAdmin;
+        protected global::System.Web.UI.WebControls.Button btnFillStudent;
+        protected global::System.Web.UI.WebControls.Button btnFillFaculty;
+    }
+}
