@@ -8,7 +8,7 @@
     <title><%: Page.Title %> - ShopSphere</title>
 
     <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="~/favicon.ico" />
+    <link runat="server" rel="icon" type="image/x-icon" href="~/favicon.ico" />
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -19,8 +19,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
     <!-- Tailstore Template Stylesheets -->
-    <link rel="stylesheet" href="~/assets/css/styles.css" />
-    <link rel="stylesheet" href="~/assets/css/custom.css" />
+    <link runat="server" rel="stylesheet" href="~/assets/css/styles.css" />
+    <link runat="server" rel="stylesheet" href="~/assets/css/custom.css" />
 
     <asp:ContentPlaceHolder ID="HeadContent" runat="server">
     </asp:ContentPlaceHolder>
@@ -44,13 +44,13 @@
                 <!-- Left Section: Logo with proper right margin -->
                 <div class="flex items-center shrink-0 mr-6 xl:mr-10 site-header-brand">
                     <a runat="server" href="~/Default.aspx" class="flex items-center group">
-                        <img runat="server" src="~/assets/images/template-white-logo.png" alt="ShopSphere Logo" class="h-9 w-auto transition-transform group-hover:scale-105" />
+                        <img runat="server" src="~/assets/images/template-white-logo.png" alt="ShopSphere" class="h-6 w-auto transition-transform group-hover:scale-105 site-header-logo" />
                     </a>
                 </div>
 
                 <!-- Hamburger Menu Button (Mobile) -->
                 <div class="flex lg:hidden site-header-toggle">
-                    <button type="button" id="hamburger" class="text-white focus:outline-none p-2 rounded-lg hover:bg-gray-800 transition" aria-label="Toggle Navigation">
+                    <button type="button" id="hamburger" class="text-white focus:outline-none p-2 rounded-lg hover:bg-gray-800 transition" aria-label="Toggle navigation" aria-controls="mobile-menu" aria-expanded="false">
                         <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
                         </svg>
@@ -60,12 +60,11 @@
                 <!-- Center Section: Main Navigation Links with Generous Spacing -->
                 <nav class="hidden lg:flex items-center justify-center flex-1 mx-4 xl:mx-8 site-header-nav">
                     <ul class="flex items-center justify-center text-white text-sm font-semibold tracking-wide">
-                        <li><a runat="server" href="~/Default.aspx" class="px-3.5 py-2 rounded-full hover:bg-white/10 hover:text-primary transition-all">Home</a></li>
-                        <li><a runat="server" href="~/Shop.aspx" class="px-3.5 py-2 rounded-full hover:bg-white/10 hover:text-primary transition-all">Shop</a></li>
-                        <li><a runat="server" href="~/ScreenTime.aspx" class="px-3.5 py-2 rounded-full hover:bg-white/10 hover:text-primary transition-all">Instagram Analyzer</a></li>
-                        <li><a runat="server" href="~/ElectricityBill.aspx" class="px-3.5 py-2 rounded-full hover:bg-white/10 hover:text-primary transition-all">Electricity Bill</a></li>
-                        <li><a runat="server" href="~/Records.aspx" class="px-3.5 py-2 rounded-full hover:bg-white/10 hover:text-primary transition-all">Records (GridView)</a></li>
-                        <li><a runat="server" href="~/Error404.aspx" class="px-3.5 py-2 rounded-full hover:bg-white/10 hover:text-primary transition-all">404 Page</a></li>
+                        <li><a runat="server" href="~/Default.aspx" class="hover:bg-white/10 hover:text-primary transition-all">Home</a></li>
+                        <li><a runat="server" href="~/Shop.aspx" class="hover:bg-white/10 hover:text-primary transition-all">Shop</a></li>
+                        <li><a runat="server" href="~/ScreenTime.aspx" class="hover:bg-white/10 hover:text-primary transition-all">Instagram Analyzer</a></li>
+                        <li><a runat="server" href="~/ElectricityBill.aspx" class="hover:bg-white/10 hover:text-primary transition-all">Electricity Bill</a></li>
+                        <li><a runat="server" href="~/Records.aspx" class="hover:bg-white/10 hover:text-primary transition-all">Records (GridView)</a></li>
                     </ul>
                 </nav>
 
@@ -87,13 +86,12 @@
 
             <!-- Mobile Navigation Drawer with Comfortable Tap Spacing -->
             <div id="mobile-menu" class="mobile-menu hidden lg:hidden bg-gray-900 text-white px-6 py-5 border-t border-gray-800">
-                <ul class="flex flex-col space-y-2 font-semibold text-sm">
+                <ul class="flex flex-col font-semibold text-sm">
                     <li><a runat="server" href="~/Default.aspx" class="block px-3 py-2 rounded-lg hover:bg-gray-800 hover:text-primary transition">Home</a></li>
                     <li><a runat="server" href="~/Shop.aspx" class="block px-3 py-2 rounded-lg hover:bg-gray-800 hover:text-primary transition">Shop</a></li>
                     <li><a runat="server" href="~/ScreenTime.aspx" class="block px-3 py-2 rounded-lg hover:bg-gray-800 hover:text-primary transition">Instagram Analyzer</a></li>
                     <li><a runat="server" href="~/ElectricityBill.aspx" class="block px-3 py-2 rounded-lg hover:bg-gray-800 hover:text-primary transition">Electricity Bill</a></li>
                     <li><a runat="server" href="~/Records.aspx" class="block px-3 py-2 rounded-lg hover:bg-gray-800 hover:text-primary transition">Database Records (GridView)</a></li>
-                    <li><a runat="server" href="~/Error404.aspx" class="block px-3 py-2 rounded-lg hover:bg-gray-800 hover:text-primary transition">404 Page</a></li>
                     <li class="pt-3 mt-2 border-t border-gray-800 flex flex-col space-y-2.5">
                         <% if (Session["Username"] != null) { %>
                             <div class="text-xs text-gray-300 px-3 py-1">Signed in as <b><%= Session["Username"] %></b> (<%= Session["Role"] %>)</div>
@@ -119,58 +117,45 @@
                 <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
                     <!-- Column 1: Brand Info -->
                     <div class="space-y-4">
-                        <img runat="server" src="~/assets/images/template-white-logo.png" alt="ShopSphere Logo" class="h-10 w-auto" />
+                        <img runat="server" src="~/assets/images/template-white-logo.png" alt="ShopSphere" class="h-6 w-auto site-header-logo" />
                         <p class="text-gray-400 text-sm leading-relaxed">
                             ShopSphere is a full-stack college PBL project combining modern e-commerce storefront design with practical ASP.NET Web Forms computing modules.
                         </p>
-                        <div class="flex space-x-3 text-white">
-                            <span class="w-8 h-8 rounded-full bg-gray-800 flex items-center justify-center hover:bg-primary transition"><i class="fa-brands fa-facebook-f"></i></span>
-                            <span class="w-8 h-8 rounded-full bg-gray-800 flex items-center justify-center hover:bg-primary transition"><i class="fa-brands fa-instagram"></i></span>
-                            <span class="w-8 h-8 rounded-full bg-gray-800 flex items-center justify-center hover:bg-primary transition"><i class="fa-brands fa-github"></i></span>
-                        </div>
                     </div>
 
                     <!-- Column 2: Quick Links -->
                     <div>
-                        <h4 class="text-white font-bold text-base mb-4 uppercase tracking-wider">Quick Navigation</h4>
+                        <h4 class="text-white font-bold text-base mb-4 uppercase tracking-wider">Shop</h4>
                         <ul class="space-y-2">
-                            <li><a runat="server" href="~/Default.aspx" class="hover:text-primary transition">Home Storefront</a></li>
-                            <li><a runat="server" href="~/Shop.aspx" class="hover:text-primary transition">Product Catalog</a></li>
-                            <li><a runat="server" href="~/Records.aspx" class="hover:text-primary transition">GridView Database Viewer</a></li>
-                            <li><a runat="server" href="~/Error404.aspx" class="hover:text-primary transition">404 Error Page</a></li>
+                            <li><a runat="server" href="~/Default.aspx" class="hover:text-primary transition">Home</a></li>
+                            <li><a runat="server" href="~/Shop.aspx" class="hover:text-primary transition">Browse products</a></li>
+                            <li><a runat="server" href="~/About.aspx" class="hover:text-primary transition">About ShopSphere</a></li>
+                            <li><a runat="server" href="~/Contact.aspx" class="hover:text-primary transition">Contact</a></li>
                         </ul>
                     </div>
 
                     <!-- Column 3: Assignment Modules -->
                     <div>
-                        <h4 class="text-white font-bold text-base mb-4 uppercase tracking-wider">PBL Modules</h4>
+                        <h4 class="text-white font-bold text-base mb-4 uppercase tracking-wider">Account</h4>
                         <ul class="space-y-2">
-                            <li><a runat="server" href="~/Login.aspx" class="hover:text-primary transition">Three-Role Authentication</a></li>
-                            <li><a runat="server" href="~/Register.aspx" class="hover:text-primary transition">Database User Registration</a></li>
-                            <li><a runat="server" href="~/ScreenTime.aspx" class="hover:text-primary transition">Instagram Screen Time Analyzer</a></li>
-                            <li><a runat="server" href="~/ElectricityBill.aspx" class="hover:text-primary transition">Electricity Bill Calculator</a></li>
+                            <li><a runat="server" href="~/Login.aspx" class="hover:text-primary transition">Log in</a></li>
+                            <li><a runat="server" href="~/Register.aspx" class="hover:text-primary transition">Create an account</a></li>
                         </ul>
                     </div>
 
-                    <!-- Column 4: College Project Details -->
                     <div>
-                        <h4 class="text-white font-bold text-base mb-4 uppercase tracking-wider">College Information</h4>
-                        <p class="text-xs text-gray-400 mb-2 font-semibold">ITM SLS BU School of Computer Science & Engineering</p>
-                        <p class="text-xs text-gray-400 mb-1">B.Tech Semester-3 (Academic Year 2026-27)</p>
-                        <p class="text-xs text-gray-400 mb-1">PBL Component: ASP.NET Web Forms & C#</p>
-                        <p class="text-xs text-gray-400">Database: Microsoft SQL Server & ADO.NET</p>
-                        <div class="mt-4 p-3 bg-gray-900 rounded border border-gray-800 text-xs">
-                            <span class="text-primary font-bold">Demo Accounts:</span><br />
-                            admin / admin123<br />
-                            student / stud123<br />
-                            faculty / fac123
-                        </div>
+                        <h4 class="text-white font-bold text-base mb-4 uppercase tracking-wider">Project Tools</h4>
+                        <ul class="space-y-2">
+                            <li><a runat="server" href="~/ScreenTime.aspx" class="hover:text-primary transition">Screen Time Analyzer</a></li>
+                            <li><a runat="server" href="~/ElectricityBill.aspx" class="hover:text-primary transition">Electricity Bill Calculator</a></li>
+                            <li><a runat="server" href="~/Records.aspx" class="hover:text-primary transition">Database Records</a></li>
+                        </ul>
                     </div>
                 </div>
 
                 <div class="border-t border-gray-800 mt-10 pt-6 flex flex-col md:flex-row justify-between items-center text-xs text-gray-500">
-                    <p>&copy; <%: DateTime.Now.Year %> ShopSphere PBL Project. Second-Year B.Tech Computer Science.</p>
-                    <p>Designed with Tailstore &bull; Powered by ASP.NET Web Forms &amp; SQL Server</p>
+                    <p>&copy; <%: DateTime.Now.Year %> ShopSphere</p>
+                    <p>Designed with Tailstore &bull; Powered by ASP.NET Web Forms</p>
                 </div>
             </div>
         </footer>
@@ -185,6 +170,14 @@
             if (hamburger && mobileMenu) {
                 hamburger.addEventListener('click', function () {
                     mobileMenu.classList.toggle('hidden');
+                    hamburger.setAttribute('aria-expanded', mobileMenu.classList.contains('hidden') ? 'false' : 'true');
+                });
+                document.addEventListener('keydown', function (event) {
+                    if (event.key === 'Escape' && !mobileMenu.classList.contains('hidden')) {
+                        mobileMenu.classList.add('hidden');
+                        hamburger.setAttribute('aria-expanded', 'false');
+                        hamburger.focus();
+                    }
                 });
             }
         });

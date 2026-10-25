@@ -14,7 +14,7 @@ button:hover {
 }
 
 .mobile-menu {
-    padding: 2rem;
+    padding: 1.25rem 1.5rem;
 }
 
 /* Keep the full header in one row only while there is room for every section. */
@@ -28,9 +28,17 @@ button:hover {
     flex: 0 0 auto;
 }
 
+.site-header-logo {
+    filter: sepia(.12) saturate(.85);
+}
+
 .site-header-nav {
     min-width: 0;
-    margin-inline: 1rem;
+    margin-inline: 0;
+}
+
+.site-header-brand {
+    margin-right: 0;
 }
 
 .site-header-nav ul {
@@ -43,6 +51,7 @@ button:hover {
     display: inline-flex;
     align-items: center;
     padding: 0.6rem 0.25rem;
+    border-radius: 9999px;
 }
 
 .site-header-auth {
@@ -53,6 +62,263 @@ button:hover {
 .site-header-auth > a {
     padding-inline: 1.25rem;
     white-space: nowrap;
+}
+
+.mobile-menu ul {
+    text-align: left;
+}
+
+.mobile-menu li {
+    border-color: #374151;
+    padding-block: 0.25rem;
+}
+
+.mobile-menu li:last-child {
+    padding-top: 1rem;
+}
+
+.site-header-layout a:focus-visible,
+.site-header-layout button:focus-visible,
+.home-hero a:focus-visible,
+.tool-card:focus-visible,
+.content-page a:focus-visible {
+    outline: 2px solid #d6b982;
+    outline-offset: 3px;
+}
+
+.home-hero {
+    position: relative;
+    display: flex;
+    align-items: center;
+    min-height: 26rem;
+    margin: 2rem auto 0;
+    overflow: hidden;
+    color: #fff;
+    background: linear-gradient(90deg, rgba(12, 16, 27, .92), rgba(12, 16, 27, .58)), url('../images/banner1.jpg') center 45% / cover;
+}
+
+.home-hero-content {
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+}
+
+.home-eyebrow {
+    display: block;
+    margin-bottom: 0.75rem;
+    color: #d6b982;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+
+.home-hero h1 {
+    max-width: 42rem;
+    margin: 0;
+    font-size: clamp(2.5rem, 6vw, 4.25rem);
+    font-weight: 800;
+    line-height: 1.05;
+    letter-spacing: -0.04em;
+}
+
+.home-hero h1 span {
+    color: #e9d8b5;
+}
+
+.home-hero p {
+    max-width: 34rem;
+    margin: 1.25rem 0 0;
+    color: #e5e7eb;
+    font-size: 1.05rem;
+    line-height: 1.7;
+}
+
+.home-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 1.75rem;
+}
+
+.button {
+    display: inline-flex;
+    min-height: 2.75rem;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.65rem 1.15rem;
+    border: 1px solid transparent;
+    border-radius: 9999px;
+    font-size: 0.9rem;
+    font-weight: 700;
+    text-decoration: none;
+    transition: background-color .18s ease, color .18s ease, border-color .18s ease;
+}
+
+.button-primary {
+    color: #fff;
+    background: #b90b3d;
+}
+
+.button-primary:hover {
+    background: #990832;
+}
+
+.button-secondary {
+    color: #fff;
+    border-color: rgba(255,255,255,.55);
+    background: rgba(255,255,255,.08);
+}
+
+.button-secondary:hover {
+    color: #111827;
+    background: #fff;
+}
+
+.home-tools {
+    padding-top: 4rem;
+    padding-bottom: 5rem;
+}
+
+.section-heading {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.section-heading h2,
+.content-page h1 {
+    margin: 0;
+    color: #111827;
+    font-size: clamp(1.6rem, 3vw, 2rem);
+    font-weight: 800;
+    letter-spacing: -0.025em;
+}
+
+.section-heading .home-eyebrow,
+.content-page .home-eyebrow {
+    margin-bottom: 0.35rem;
+    color: #8a6d3b;
+}
+
+.section-heading > p {
+    margin: 0;
+    color: #6b7280;
+    font-size: 0.9rem;
+}
+
+.tool-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1rem;
+}
+
+.tool-card {
+    display: flex;
+    min-height: 5.25rem;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.9rem 1rem;
+    border: 1px solid #e5e7eb;
+    border-radius: 0.65rem;
+    color: #111827;
+    background: #fff;
+    text-decoration: none;
+    transition: border-color .18s ease, background-color .18s ease;
+}
+
+.tool-card:hover {
+    border-color: #d1d5db;
+    background: #fafafa;
+}
+
+.tool-icon {
+    display: grid;
+    width: 2.25rem;
+    height: 2.25rem;
+    flex: 0 0 auto;
+    place-items: center;
+    color: #6b7280;
+}
+
+.tool-card strong,
+.tool-card small {
+    display: block;
+}
+
+.tool-card strong {
+    font-size: 0.9rem;
+    font-weight: 700;
+}
+
+.tool-card small {
+    margin-top: 0.15rem;
+    color: #6b7280;
+    font-size: 0.78rem;
+}
+
+.tool-arrow {
+    margin-left: auto;
+    color: #9ca3af;
+    font-size: 0.8rem;
+}
+
+.content-page {
+    max-width: 56rem;
+    min-height: 55vh;
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+}
+
+.content-page p {
+    max-width: 42rem;
+    margin: 1rem 0 1.5rem;
+    color: #4b5563;
+    font-size: 1.05rem;
+    line-height: 1.8;
+}
+
+@media (max-width: 767px) {
+    .home-hero {
+        min-height: 22rem;
+        margin-top: 1rem;
+        background-position: 58% center;
+    }
+
+    .home-hero-content {
+        padding-top: 3.5rem;
+        padding-bottom: 3.5rem;
+    }
+
+    .home-hero p {
+        font-size: 0.95rem;
+    }
+
+    .home-tools {
+        padding-top: 3rem;
+        padding-bottom: 3.5rem;
+    }
+
+    .section-heading {
+        display: block;
+    }
+
+    .section-heading > p {
+        margin-top: 0.5rem;
+    }
+
+    .tool-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        scroll-behavior: auto !important;
+        transition-duration: .01ms !important;
+    }
 }
 
 .site-header-nav li,
@@ -102,23 +368,20 @@ button:hover {
 
 .mobile-menu ul {
     width: 100%;
-    text-align: center;
-}
-
-.mobile-menu ul {
+    text-align: left;
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
 }
 
 .mobile-menu li {
-    border-bottom: 1px solid #e0e0e0;
-    padding-bottom: 1rem;
-    padding-top: 1rem;
+    border-bottom: 1px solid #374151;
+    padding-block: 0.25rem;
 }
 
 .mobile-menu li:last-child {
     border-bottom: 0;
+    padding-top: 1rem;
 }
 
 .mobile-dropdown-menu li{

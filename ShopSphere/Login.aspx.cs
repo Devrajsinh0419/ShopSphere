@@ -40,41 +40,14 @@ namespace ShopSphere
                 Session["Username"] = verifiedUsername;
                 Session["FullName"] = fullName;
                 Session["Role"] = role;
-
-                // Format the Welcome message exactly as specified in Assignment 1
-                string welcomeText;
-                if (string.Equals(role, "Administrator", StringComparison.OrdinalIgnoreCase))
-                {
-                    welcomeText = "Welcome Administrator";
-                }
-                else if (string.Equals(role, "Student", StringComparison.OrdinalIgnoreCase))
-                {
-                    welcomeText = "Welcome Student";
-                }
-                else if (string.Equals(role, "Faculty", StringComparison.OrdinalIgnoreCase))
-                {
-                    welcomeText = "Welcome Faculty";
-                }
-                else
-                {
-                    welcomeText = "Welcome " + role;
-                }
-
-                ShowSuccessMessage(welcomeText);
+                Response.Redirect("~/Default.aspx", false);
+                Context.ApplicationInstance.CompleteRequest();
             }
             else
             {
                 // Assignment requirement: "Any other Any other -> Invalid Username or Password"
                 ShowErrorMessage("Invalid Username or Password");
             }
-        }
-
-        private void ShowSuccessMessage(string message)
-        {
-            pnlMessage.Visible = true;
-            lblMessage.Text = message;
-            divAlertBox.Attributes["class"] = "px-4 py-3 rounded-xl border flex items-center space-x-3 text-sm bg-green-50 border-green-200 text-green-800";
-            iconAlert.Attributes["class"] = "fa-solid fa-circle-check text-green-600 text-base";
         }
 
         private void ShowErrorMessage(string message)
