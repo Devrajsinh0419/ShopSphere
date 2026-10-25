@@ -58,29 +58,5 @@ namespace ShopSphere
             iconAlert.Attributes["class"] = "fa-solid fa-circle-xmark text-red-600 text-base";
         }
 
-        // Quick Viva Demo Autofill Handlers
-        protected void btnFillAdmin_Click(object sender, EventArgs e)
-        {
-            txtUsername.Text = "admin";
-            txtPassword.Attributes["value"] = "admin123";
-            txtPassword.Text = "admin123";
-            pnlMessage.Visible = false;
-        }
-
-        protected void btnFillStudent_Click(object sender, EventArgs e)
-        {
-            txtUsername.Text = "student";
-            txtPassword.Attributes["value"] = "stud123";
-            txtPassword.Text = "stud123";
-            pnlMessage.Visible = false;
-        }
-
-        protected void btnFillFaculty_Click(object sender, EventArgs e)
-        {
-            txtUsername.Text = "faculty";
-            txtPassword.Attributes["value"] = "fac123";
-            txtPassword.Text = "fac123";
-            pnlMessage.Visible = false;
-        }
     }
 }

@@ -9,8 +9,5 @@ namespace ShopSphere
         protected global::System.Web.UI.WebControls.TextBox txtUsername;
         protected global::System.Web.UI.WebControls.TextBox txtPassword;
         protected global::System.Web.UI.WebControls.Button btnLogin;
-        protected global::System.Web.UI.WebControls.Button btnFillAdmin;
-        protected global::System.Web.UI.WebControls.Button btnFillStudent;
-        protected global::System.Web.UI.WebControls.Button btnFillFaculty;
     }
 }
