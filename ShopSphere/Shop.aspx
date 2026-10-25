@@ -28,10 +28,10 @@
     <!-- Main Shop Section -->
     <section id="shop" class="py-10">
         <div class="container mx-auto px-4">
-            <div class="flex flex-col lg:flex-row gap-8">
+            <div class="flex flex-col lg:flex-row gap-6">
                 <!-- Sidebar Filters -->
                 <aside class="w-full lg:w-1/4">
-                    <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-200 space-y-6">
+                    <div class="bg-white p-5 rounded-xl shadow-sm border border-gray-200 space-y-5">
                         <!-- Search Box -->
                         <div>
                             <label class="block text-sm font-bold text-gray-700 mb-2">Search Products</label>
@@ -74,17 +74,17 @@
                     </div>
 
                     <!-- Products Repeater -->
-                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                         <asp:Repeater ID="rptProducts" runat="server" OnItemCommand="rptProducts_ItemCommand">
                             <ItemTemplate>
-                                <div class="bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden hover:shadow-xl transition-all duration-300 flex flex-col justify-between">
+                                <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden hover:shadow-md transition-all duration-300 flex flex-col justify-between">
                                     <div class="relative">
-                                        <img src='<%# Eval("ImageUrl") %>' alt='<%# Eval("ProductName") %>' class="w-full h-64 object-cover">
+                                        <img src='<%# Eval("ImageUrl") %>' alt='<%# Eval("ProductName") %>' class="w-full h-48 object-cover">
                                         <span class="absolute top-3 right-3 bg-gray-dark/80 backdrop-blur-xs text-white text-xs font-bold px-2.5 py-1 rounded-full">
                                             <%# Eval("Category") %>
                                         </span>
                                     </div>
-                                    <div class="p-5 flex flex-col flex-grow justify-between">
+                                    <div class="p-4 flex flex-col flex-grow justify-between">
                                         <div>
                                             <h3 class="font-bold text-gray-900 text-lg mb-1"><%# Eval("ProductName") %></h3>
                                             <p class="text-xs text-gray-500 mb-3"><%# Eval("Description") %></p>

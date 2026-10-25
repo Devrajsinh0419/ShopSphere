@@ -33,16 +33,22 @@
                         <asp:TextBox ID="txtEmail" runat="server" TextMode="Email" CssClass="auth-input" autocomplete="email"></asp:TextBox>
                     </div>
                     <div class="auth-field">
-                        <label for="<%= txtMobile.ClientID %>">Mobile number <span class="auth-optional">Optional</span></label>
-                        <asp:TextBox ID="txtMobile" runat="server" CssClass="auth-input" autocomplete="tel"></asp:TextBox>
+                        <label for="<%= txtMobile.ClientID %>">Mobile number</label>
+                        <asp:TextBox ID="txtMobile" runat="server" CssClass="auth-input" autocomplete="tel" MaxLength="10"></asp:TextBox>
                     </div>
                     <div class="auth-field">
                         <label for="<%= txtPassword.ClientID %>">Password</label>
-                        <asp:TextBox ID="txtPassword" runat="server" TextMode="Password" CssClass="auth-input" autocomplete="new-password"></asp:TextBox>
+                        <div class="auth-password-control">
+                            <asp:TextBox ID="txtPassword" runat="server" TextMode="Password" CssClass="auth-input" autocomplete="new-password"></asp:TextBox>
+                            <button type="button" class="auth-password-toggle" aria-label="Show password" aria-pressed="false"><i class="fa-regular fa-eye" aria-hidden="true"></i></button>
+                        </div>
                     </div>
                     <div class="auth-field">
                         <label for="<%= txtConfirmPassword.ClientID %>">Confirm password</label>
-                        <asp:TextBox ID="txtConfirmPassword" runat="server" TextMode="Password" CssClass="auth-input" autocomplete="new-password"></asp:TextBox>
+                        <div class="auth-password-control">
+                            <asp:TextBox ID="txtConfirmPassword" runat="server" TextMode="Password" CssClass="auth-input" autocomplete="new-password"></asp:TextBox>
+                            <button type="button" class="auth-password-toggle" aria-label="Show password" aria-pressed="false"><i class="fa-regular fa-eye" aria-hidden="true"></i></button>
+                        </div>
                     </div>
                 </div>
 

@@ -112,14 +112,14 @@
         </main>
 
         <!-- Tailstore Professional Footer -->
-        <footer class="bg-gray-dark text-gray-400 text-sm mt-16 border-t border-gray-800">
+        <footer class="site-footer bg-gray-dark text-sm mt-16 border-t border-gray-800">
             <div class="container mx-auto px-4 py-12">
                 <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
                     <!-- Column 1: Brand Info -->
                     <div class="space-y-4">
                         <img runat="server" src="~/assets/images/template-white-logo.png" alt="ShopSphere" class="h-6 w-auto site-header-logo" />
                         <p class="text-gray-400 text-sm leading-relaxed">
-                            ShopSphere is a full-stack college PBL project combining modern e-commerce storefront design with practical ASP.NET Web Forms computing modules.
+                            ShopSphere combines a product catalog with practical web tools.
                         </p>
                     </div>
 
@@ -134,7 +134,7 @@
                         </ul>
                     </div>
 
-                    <!-- Column 3: Assignment Modules -->
+                    <!-- Account links -->
                     <div>
                         <h4 class="text-white font-bold text-base mb-4 uppercase tracking-wider">Account</h4>
                         <ul class="space-y-2">
@@ -180,6 +180,19 @@
                     }
                 });
             }
+
+            document.querySelectorAll('.auth-password-toggle').forEach(function (toggle) {
+                toggle.addEventListener('click', function () {
+                    var input = toggle.previousElementSibling;
+                    if (!input) return;
+
+                    var showPassword = input.type === 'password';
+                    input.type = showPassword ? 'text' : 'password';
+                    toggle.setAttribute('aria-pressed', showPassword ? 'true' : 'false');
+                    toggle.setAttribute('aria-label', showPassword ? 'Hide password' : 'Show password');
+                    toggle.querySelector('i').className = showPassword ? 'fa-regular fa-eye-slash' : 'fa-regular fa-eye';
+                });
+            });
         });
     </script>
 </body>

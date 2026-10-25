@@ -14,7 +14,7 @@ namespace ShopSphere
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
-            // Automatically verify database and seed required tables and default user roles
+            // Ensure the database schema exists without adding example records.
             DbHelper.InitializeDatabase();
         }
     }

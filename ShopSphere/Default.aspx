@@ -1,6 +1,11 @@
 <%@ Page Title="Home" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="ShopSphere._Default" %>
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
+    <asp:Panel ID="pnlFlashMessage" runat="server" Visible="false" CssClass="site-notification container mx-auto px-4" role="status">
+        <i class="fa-solid fa-circle-check" aria-hidden="true"></i>
+        <asp:Label ID="lblFlashMessage" runat="server"></asp:Label>
+    </asp:Panel>
+
     <section class="home-hero">
         <div class="container mx-auto px-4 home-hero-content">
             <span class="home-eyebrow">ShopSphere · Store &amp; project tools</span>

@@ -8,8 +8,8 @@ namespace ShopSphere.Helpers
 {
     /// <summary>
     /// Database Helper Class for ShopSphere.
-    /// Provides ADO.NET database operations, automatic schema initialization,
-    /// seed data generation, and secure password hashing with salt.
+    /// Provides ADO.NET database operations, schema initialization,
+    /// and secure password hashing with salt.
     /// Designed for second-year B.Tech students to understand and explain.
     /// </summary>
     public static class DbHelper
@@ -39,7 +39,7 @@ namespace ShopSphere.Helpers
         }
 
         /// <summary>
-        /// Automatically checks and initializes the database, tables, and seed data.
+        /// Ensures the database and required tables exist without inserting example records.
         /// Called on application start in Global.asax.cs.
         /// </summary>
         public static void InitializeDatabase()
@@ -48,14 +48,10 @@ namespace ShopSphere.Helpers
             {
                 EnsureDatabaseCreated();
                 CreateTablesIfNotExist();
-                SeedDefaultUsers();
-                SeedDefaultProducts();
-                SeedSampleCalculations();
             }
             catch (Exception ex)
             {
                 // In a production environment we would log to a file.
-                // For college demo, we write to System.Diagnostics.Debug so it never crashes the application.
                 System.Diagnostics.Debug.WriteLine("Database initialization note: " + ex.Message);
             }
         }
@@ -117,7 +113,7 @@ namespace ShopSphere.Helpers
                         );
                     END";
 
-                // 2. ElectricityBills Table (Assignment 2)
+                // 2. Electricity bills table
                 string createBillsTable = @"
                     IF NOT EXISTS (SELECT * FROM sys.tables WHERE name = 'ElectricityBills')
                     BEGIN
@@ -134,7 +130,7 @@ namespace ShopSphere.Helpers
                         );
                     END";
 
-                // 3. ScreenTimeLogs Table (Assignment 1)
+                // 3. Screen time logs table
                 string createScreenTimeTable = @"
                     IF NOT EXISTS (SELECT * FROM sys.tables WHERE name = 'ScreenTimeLogs')
                     BEGIN
@@ -170,53 +166,6 @@ namespace ShopSphere.Helpers
         }
 
         /// <summary>
-        /// Pre-seeds the three mandatory user roles from the assignment:
-        /// admin/admin123 — Administrator
-        /// student/stud123 — Student
-        /// faculty/fac123 — Faculty
-        /// </summary>
-        private static void SeedDefaultUsers()
-        {
-            using (SqlConnection conn = GetOpenConnection())
-            {
-                // Check if admin exists
-                string checkUserSql = "SELECT COUNT(*) FROM Users WHERE Username = @Username";
-
-                // 1. Admin
-                using (SqlCommand cmd = new SqlCommand(checkUserSql, conn))
-                {
-                    cmd.Parameters.AddWithValue("@Username", "admin");
-                    int count = (int)cmd.ExecuteScalar();
-                    if (count == 0)
-                    {
-                        InsertUserDirect(conn, "admin", "admin123", "System Administrator", "admin@shopsphere.edu", "9876543210", "Administrator");
-                    }
-                }
-
-                // 2. Student
-                using (SqlCommand cmd = new SqlCommand(checkUserSql, conn))
-                {
-                    cmd.Parameters.AddWithValue("@Username", "student");
-                    int count = (int)cmd.ExecuteScalar();
-                    if (count == 0)
-                    {
-                        InsertUserDirect(conn, "student", "stud123", "B.Tech Student", "student@shopsphere.edu", "9876543211", "Student");
-                    }
-                }
-
-                // 3. Faculty
-                using (SqlCommand cmd = new SqlCommand(checkUserSql, conn))
-                {
-                    cmd.Parameters.AddWithValue("@Username", "faculty");
-                    int count = (int)cmd.ExecuteScalar();
-                    if (count == 0)
-                    {
-                        InsertUserDirect(conn, "faculty", "fac123", "Department Faculty", "faculty@shopsphere.edu", "9876543212", "Faculty");
-                    }
-                }
-            }
-        }
-
         /// <summary>
         /// Inserts a user with hashed password and salt into the database.
         /// </summary>
@@ -243,86 +192,6 @@ namespace ShopSphere.Helpers
         }
 
         /// <summary>
-        /// Seeds the Tailstore product items into the database if the table is empty.
-        /// </summary>
-        private static void SeedDefaultProducts()
-        {
-            using (SqlConnection conn = GetOpenConnection())
-            {
-                string countSql = "SELECT COUNT(*) FROM Products";
-                using (SqlCommand countCmd = new SqlCommand(countSql, conn))
-                {
-                    int count = (int)countCmd.ExecuteScalar();
-                    if (count == 0)
-                    {
-                        string insertSql = @"
-                            INSERT INTO Products (ProductName, Category, Price, OriginalPrice, ImageUrl, Description) VALUES
-                            (N'Blue Women''s Suit', N'Women', 19.99, 24.99, N'assets/images/products/5.jpg', N'Elegant formal slim-fit suit for work and events'),
-                            (N'White Long Sleeve Shirt', N'Women', 29.99, 34.99, N'assets/images/products/6.jpg', N'Classic breathable white button-down shirt'),
-                            (N'Yellow Men''s Suit', N'Men', 15.99, 19.99, N'assets/images/products/7.jpg', N'Modern casual blazer crafted with lightweight fabric'),
-                            (N'Red Designer Dress', N'Women', 39.99, 49.99, N'assets/images/products/8.jpg', N'Vibrant evening dress with contemporary silhouette'),
-                            (N'Black Leather Jacket', N'Women', 49.99, 59.99, N'assets/images/products/4.jpg', N'Premium faux leather biker jacket with silver hardware'),
-                            (N'Black Evening Gown', N'Women', 35.99, 45.00, N'assets/images/products/3.jpg', N'Timeless formal floor-length dress'),
-                            (N'Casual Cotton Tee', N'Men', 12.99, 18.00, N'assets/images/products/1.jpg', N'Everyday comfort fit premium round-neck t-shirt'),
-                            (N'Sporty Urban Hoodie', N'Men', 28.50, 36.00, N'assets/images/products/2.jpg', N'Warm fleece-lined pullover for cool days');";
-
-                        using (SqlCommand insertCmd = new SqlCommand(insertSql, conn))
-                        {
-                            insertCmd.ExecuteNonQuery();
-                        }
-                    }
-                }
-            }
-        }
-
-        /// <summary>
-        /// Seeds sample calculations so GridViews have initial demo data.
-        /// </summary>
-        private static void SeedSampleCalculations()
-        {
-            using (SqlConnection conn = GetOpenConnection())
-            {
-                // Seed sample electricity bills if empty
-                string countBillsSql = "SELECT COUNT(*) FROM ElectricityBills";
-                using (SqlCommand cmd = new SqlCommand(countBillsSql, conn))
-                {
-                    int count = (int)cmd.ExecuteScalar();
-                    if (count == 0)
-                    {
-                        string insertBills = @"
-                            INSERT INTO ElectricityBills (CustomerId, CustomerName, UnitsConsumed, BillBeforeGst, GstRate, GstAmount, TotalAmount, CalculatedAt) VALUES
-                            (N'CUST-1001', N'Rohan Sharma', 150, 630.00, 12.00, 75.60, 705.60, DATEADD(day, -3, GETDATE())),
-                            (N'CUST-1002', N'Pooja Patel', 250, 1215.00, 18.00, 218.70, 1433.70, DATEADD(day, -2, GETDATE())),
-                            (N'CUST-1003', N'Aman Gupta', 80, 336.00, 5.00, 16.80, 352.80, DATEADD(day, -1, GETDATE()));";
-                        using (SqlCommand insertCmd = new SqlCommand(insertBills, conn))
-                        {
-                            insertCmd.ExecuteNonQuery();
-                        }
-                    }
-                }
-
-                // Seed sample screen time logs if empty
-                string countLogsSql = "SELECT COUNT(*) FROM ScreenTimeLogs";
-                using (SqlCommand cmd = new SqlCommand(countLogsSql, conn))
-                {
-                    int count = (int)cmd.ExecuteScalar();
-                    if (count == 0)
-                    {
-                        string insertLogs = @"
-                            INSERT INTO ScreenTimeLogs (Username, ScreenTimeHours, UsageCategory, RecordedAt) VALUES
-                            (N'student', 0.8, N'Excellent! Healthy Usage', DATEADD(day, -3, GETDATE())),
-                            (N'student', 1.5, N'Good Usage', DATEADD(day, -2, GETDATE())),
-                            (N'faculty', 3.0, N'Moderate Usage', DATEADD(day, -1, GETDATE())),
-                            (N'student', 5.2, N'High Usage', GETDATE());";
-                        using (SqlCommand insertCmd = new SqlCommand(insertLogs, conn))
-                        {
-                            insertCmd.ExecuteNonQuery();
-                        }
-                    }
-                }
-            }
-        }
-
         // ==========================================
         // PASSWORD HASHING AND AUTHENTICATION
         // ==========================================

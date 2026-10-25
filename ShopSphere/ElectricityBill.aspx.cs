@@ -58,7 +58,7 @@ namespace ShopSphere
                 return;
             }
 
-            // Assignment Instruction 1: Units Consumed must be greater than zero.
+            // Units consumed must be greater than zero.
             if (units <= 0)
             {
                 ShowError("Units Consumed must be greater than zero.");
@@ -66,7 +66,7 @@ namespace ShopSphere
                 return;
             }
 
-            // Progressive Slab Tariff Computation (Assignment 2 Specification)
+            // Progressive slab tariff computation.
             // First 200 units: ₹ 4.20 per unit
             // Next 201 to 400 units: ₹ 7.50 per unit
             // Above 400 units: ₹ 10.00 per unit
@@ -103,7 +103,7 @@ namespace ShopSphere
                 gstRate = 18.0m;
             }
 
-            // Formulas specified in Assignment 2:
+            // Apply the tariff and GST formulas.
             // GST Amount = Electricity Bill × (GST/100)
             // Total Bill = Electricity Bill + GST Amount
             decimal gstAmount = billBeforeGst * (gstRate / 100m);
@@ -160,7 +160,7 @@ namespace ShopSphere
             LoadRecentBills();
         }
 
-        // Assignment Instruction 2: Provide a Reset button to clear all input fields.
+        // Reset all input fields.
         protected void btnReset_Click(object sender, EventArgs e)
         {
             txtCustomerId.Text = string.Empty;
@@ -171,31 +171,6 @@ namespace ShopSphere
             pnlError.Visible = false;
 
             txtCustomerId.Focus();
-        }
-
-        // Quick Viva Demo Sample Handlers
-        protected void btnSample1_Click(object sender, EventArgs e)
-        {
-            txtCustomerId.Text = "CUST-001";
-            txtCustomerName.Text = "Sunil Verma";
-            txtUnits.Text = "100";
-            btnCalculate_Click(sender, e);
-        }
-
-        protected void btnSample2_Click(object sender, EventArgs e)
-        {
-            txtCustomerId.Text = "CUST-002";
-            txtCustomerName.Text = "Anita Desai";
-            txtUnits.Text = "300";
-            btnCalculate_Click(sender, e);
-        }
-
-        protected void btnSample3_Click(object sender, EventArgs e)
-        {
-            txtCustomerId.Text = "CUST-003";
-            txtCustomerName.Text = "Deepak Joshi";
-            txtUnits.Text = "500";
-            btnCalculate_Click(sender, e);
         }
 
         private void ShowError(string msg)

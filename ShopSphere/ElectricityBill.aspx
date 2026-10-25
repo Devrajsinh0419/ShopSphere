@@ -9,7 +9,7 @@
         <div class="container mx-auto px-4 flex justify-between items-center">
             <div>
                 <h1 class="text-2xl font-bold text-gray-900">Electricity Bill Calculator</h1>
-                <p class="text-xs text-gray-500 mt-1">Assignment 2 &bull; Progressive Slabs, GST Calculation &amp; Event Handling</p>
+                <p class="text-xs text-gray-500 mt-1">Progressive tariff and GST calculator</p>
             </div>
             <div class="text-sm text-gray-500">
                 <a href="Default.aspx" class="hover:text-primary">Home</a> &nbsp;/&nbsp; <span class="text-primary font-semibold">Electricity Bill</span>
@@ -18,14 +18,14 @@
     </div>
 
     <!-- Main Content Section -->
-    <section class="py-12 bg-gray-50">
+    <section class="py-10 bg-gray-50">
         <div class="container mx-auto px-4">
-            <div class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+            <div class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
                 
-                <!-- Left Column: Input Form (Assignment Requirements) -->
-                <div class="lg:col-span-7 bg-white rounded-2xl shadow-md border border-gray-200 p-8 sm:p-10">
+                <!-- Left Column: Input Form (Billing details) -->
+                <div class="lg:col-span-7 bg-white rounded-xl shadow-sm border border-gray-200 p-6 sm:p-7">
                     <div class="flex items-center space-x-3 mb-6">
-                        <div class="w-12 h-12 rounded-2xl bg-amber-500 text-white flex items-center justify-center text-2xl shadow-md">
+                        <div class="w-10 h-10 rounded-xl bg-amber-500 text-white flex items-center justify-center text-xl">
                             <i class="fa-solid fa-bolt"></i>
                         </div>
                         <div>
@@ -45,7 +45,7 @@
                         <div>
                             <label for="txtCustomerId" class="block text-sm font-semibold text-gray-700 mb-1">Customer ID</label>
                             <div class="relative">
-                                <asp:TextBox ID="txtCustomerId" runat="server" CssClass="w-full pl-10 pr-4 py-2.5 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-sm" placeholder="e.g. CUST-2026"></asp:TextBox>
+                                <asp:TextBox ID="txtCustomerId" runat="server" CssClass="w-full pl-10 pr-4 py-2.5 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-sm"></asp:TextBox>
                                 <span class="absolute left-3.5 top-3 text-gray-400">
                                     <i class="fa-solid fa-id-card"></i>
                                 </span>
@@ -55,7 +55,7 @@
                         <div>
                             <label for="txtCustomerName" class="block text-sm font-semibold text-gray-700 mb-1">Customer Name</label>
                             <div class="relative">
-                                <asp:TextBox ID="txtCustomerName" runat="server" CssClass="w-full pl-10 pr-4 py-2.5 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-sm" placeholder="e.g. Rajesh Kumar"></asp:TextBox>
+                                <asp:TextBox ID="txtCustomerName" runat="server" CssClass="w-full pl-10 pr-4 py-2.5 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-sm"></asp:TextBox>
                                 <span class="absolute left-3.5 top-3 text-gray-400">
                                     <i class="fa-solid fa-user"></i>
                                 </span>
@@ -65,12 +65,12 @@
                         <div>
                             <label for="txtUnits" class="block text-sm font-semibold text-gray-700 mb-1">Units Consumed (kWh)</label>
                             <div class="relative">
-                                <asp:TextBox ID="txtUnits" runat="server" CssClass="w-full pl-10 pr-4 py-2.5 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-sm font-semibold" placeholder="e.g. 250"></asp:TextBox>
+                                <asp:TextBox ID="txtUnits" runat="server" CssClass="w-full pl-10 pr-4 py-2.5 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-sm font-semibold"></asp:TextBox>
                                 <span class="absolute left-3.5 top-3 text-gray-400">
                                     <i class="fa-solid fa-gauge-high"></i>
                                 </span>
                             </div>
-                            <span class="text-xs text-gray-400 mt-1 block">* Mandatory instruction: Units Consumed must be greater than zero.</span>
+                            <span class="text-xs text-gray-400 mt-1 block">Units must be greater than zero.</span>
                         </div>
 
                         <!-- Buttons (Calculate and Reset) -->
@@ -80,9 +80,9 @@
                         </div>
                     </div>
 
-                    <!-- Bill Summary Output Card (Assignment 2 Mandatory Displays) -->
+                    <!-- Bill Summary Output Card (Bill summary) -->
                     <asp:Panel ID="pnlBillSummary" runat="server" Visible="false" CssClass="mt-8 pt-6 border-t border-gray-200">
-                        <div class="bg-gray-50 border border-gray-200 rounded-2xl p-6 space-y-4">
+                        <div class="bg-gray-50 border border-gray-200 rounded-xl p-4 space-y-3">
                             <div class="flex justify-between items-center pb-3 border-b border-gray-200">
                                 <span class="text-xs font-bold uppercase tracking-wider text-amber-600">Electricity Bill Invoice</span>
                                 <span class="text-xs text-gray-500">ShopSphere Utility Service</span>
@@ -124,10 +124,10 @@
                     </asp:Panel>
                 </div>
 
-                <!-- Right Column: Tariff & GST Rate Reference (From Assignment PDF) -->
-                <div class="lg:col-span-5 space-y-6">
+                <!-- Right Column: Tariff & GST Rate Reference (Rate reference) -->
+                <div class="lg:col-span-5 space-y-5">
                     <!-- Electricity Charges Slab Card -->
-                    <div class="bg-gray-900 text-white rounded-2xl p-6 shadow-md border border-gray-800">
+                    <div class="bg-gray-900 text-white rounded-xl p-5 shadow-sm border border-gray-800">
                         <h3 class="text-base font-bold mb-3 flex items-center">
                             <i class="fa-solid fa-bolt text-amber-400 mr-2"></i> Electricity Charges (Slab Rates)
                         </h3>
@@ -165,21 +165,12 @@
                         </div>
                     </div>
 
-                    <!-- Quick Demo Sample Fillers -->
-                    <div class="bg-white border border-gray-200 rounded-2xl p-6 shadow-sm text-xs space-y-3">
-                        <span class="font-bold text-gray-800 text-sm block">Quick Test Samples for Viva</span>
-                        <div class="grid grid-cols-3 gap-2">
-                            <asp:Button ID="btnSample1" runat="server" Text="100 Units" OnClick="btnSample1_Click" CssClass="py-1.5 px-2 bg-gray-100 hover:bg-amber-100 rounded-lg text-xs font-semibold text-gray-800 border border-gray-200 cursor-pointer" />
-                            <asp:Button ID="btnSample2" runat="server" Text="300 Units" OnClick="btnSample2_Click" CssClass="py-1.5 px-2 bg-gray-100 hover:bg-amber-100 rounded-lg text-xs font-semibold text-gray-800 border border-gray-200 cursor-pointer" />
-                            <asp:Button ID="btnSample3" runat="server" Text="500 Units" OnClick="btnSample3_Click" CssClass="py-1.5 px-2 bg-gray-100 hover:bg-amber-100 rounded-lg text-xs font-semibold text-gray-800 border border-gray-200 cursor-pointer" />
-                        </div>
-                    </div>
                 </div>
 
             </div>
 
             <!-- ASP.NET GridView: Saved Electricity Bills Table -->
-            <div class="max-w-6xl mx-auto mt-12 bg-white rounded-2xl shadow-md border border-gray-200 p-8">
+            <div class="max-w-6xl mx-auto mt-8 bg-white rounded-xl shadow-sm border border-gray-200 p-5">
                 <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6">
                     <div>
                         <h3 class="text-xl font-bold text-gray-900 flex items-center">

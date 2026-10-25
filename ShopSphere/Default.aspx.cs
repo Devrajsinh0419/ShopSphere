@@ -11,7 +11,13 @@ namespace ShopSphere
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            string flashMessage = Session["FlashMessage"] as string;
+            if (!string.IsNullOrEmpty(flashMessage))
+            {
+                lblFlashMessage.Text = flashMessage;
+                pnlFlashMessage.Visible = true;
+                Session.Remove("FlashMessage");
+            }
         }
     }
 }

@@ -36,7 +36,7 @@ namespace ShopSphere
             double hours;
             if (!double.TryParse(input, out hours))
             {
-                ShowError("Please enter a valid numeric value for screen time (e.g. 1.5, 3, 5).");
+                ShowError("Please enter a valid numeric value for screen time.");
                 return;
             }
 
@@ -46,7 +46,7 @@ namespace ShopSphere
                 return;
             }
 
-            // Categorization logic matching Assignment 1 exact specification
+            // Categorize usage using the defined thresholds.
             string category;
             string detail;
             string cardCss;
@@ -89,7 +89,7 @@ namespace ShopSphere
                 textColor = Color.FromArgb(190, 18, 60); // Rose 700
             }
 
-            // Display in Label control as required by Assignment 1
+            // Display the result.
             lblResult.Text = category;
             lblResult.ForeColor = textColor;
             lblResultDetail.Text = detail;
@@ -141,12 +141,6 @@ namespace ShopSphere
             pnlResult.Visible = false;
             pnlError.Visible = false;
             txtScreenTime.Focus();
-        }
-
-        protected void btnFillExample_Click(object sender, EventArgs e)
-        {
-            txtScreenTime.Text = "3";
-            btnAnalyze_Click(sender, e);
         }
 
         private void ShowError(string msg)

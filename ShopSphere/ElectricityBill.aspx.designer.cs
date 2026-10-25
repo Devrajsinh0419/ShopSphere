@@ -16,9 +16,6 @@ namespace ShopSphere
         protected global::System.Web.UI.WebControls.Label lblOutBillBeforeGst;
         protected global::System.Web.UI.WebControls.Label lblOutGstAmount;
         protected global::System.Web.UI.WebControls.Label lblOutTotalBill;
-        protected global::System.Web.UI.WebControls.Button btnSample1;
-        protected global::System.Web.UI.WebControls.Button btnSample2;
-        protected global::System.Web.UI.WebControls.Button btnSample3;
         protected global::System.Web.UI.WebControls.GridView gvRecentBills;
     }
 }

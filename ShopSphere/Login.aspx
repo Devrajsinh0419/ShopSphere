@@ -25,7 +25,10 @@
                 </div>
                 <div class="auth-field">
                     <label for="<%= txtPassword.ClientID %>">Password</label>
-                    <asp:TextBox ID="txtPassword" runat="server" TextMode="Password" CssClass="auth-input" autocomplete="current-password"></asp:TextBox>
+                    <div class="auth-password-control">
+                        <asp:TextBox ID="txtPassword" runat="server" TextMode="Password" CssClass="auth-input" autocomplete="current-password"></asp:TextBox>
+                        <button type="button" class="auth-password-toggle" aria-label="Show password" aria-pressed="false"><i class="fa-regular fa-eye" aria-hidden="true"></i></button>
+                    </div>
                 </div>
                 <asp:Button ID="btnLogin" runat="server" Text="Sign in" OnClick="btnLogin_Click" CssClass="auth-submit" />
             </div>

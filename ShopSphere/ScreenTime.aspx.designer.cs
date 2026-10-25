@@ -11,7 +11,6 @@ namespace ShopSphere
         protected global::System.Web.UI.WebControls.Label lblResultDetail;
         protected global::System.Web.UI.WebControls.Panel pnlError;
         protected global::System.Web.UI.WebControls.Label lblError;
-        protected global::System.Web.UI.WebControls.Button btnFillExample;
         protected global::System.Web.UI.WebControls.GridView gvScreenTimeLogs;
     }
 }

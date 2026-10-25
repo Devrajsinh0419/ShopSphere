@@ -9,7 +9,7 @@
         <div class="container mx-auto px-4 flex justify-between items-center">
             <div>
                 <h1 class="text-2xl font-bold text-gray-900">Database Records Viewer</h1>
-                <p class="text-xs text-gray-500 mt-1">Mandatory PBL Guideline: Display SQL Server Tables using ASP.NET GridView</p>
+                <p class="text-xs text-gray-500 mt-1">Browse registered users, bills, activity logs, and products.</p>
             </div>
             <div class="text-sm text-gray-500">
                 <a href="Default.aspx" class="hover:text-primary">Home</a> &nbsp;/&nbsp; <span class="text-primary font-semibold">Records</span>
@@ -18,17 +18,17 @@
     </div>
 
     <!-- Main Section -->
-    <section class="py-12 bg-gray-50">
+    <section class="py-10 bg-gray-50">
         <div class="container mx-auto px-4">
             
             <!-- Table Selection Toolbar -->
-            <div class="bg-white rounded-2xl shadow-sm border border-gray-200 p-6 mb-8 flex flex-col md:flex-row justify-between items-center gap-4">
+            <div class="bg-white rounded-2xl shadow-sm border border-gray-200 p-4 mb-6 flex flex-col md:flex-row justify-between items-center gap-4">
                 <div class="flex items-center space-x-3">
                     <span class="text-sm font-bold text-gray-700">Select Database Table:</span>
                     <asp:DropDownList ID="ddlTables" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlTables_SelectedIndexChanged" CssClass="px-4 py-2 border border-gray-300 rounded-full text-sm font-semibold bg-white focus:outline-none focus:ring-2 focus:ring-primary">
                         <asp:ListItem Text="Users Table (Authentication)" Value="Users" Selected="True"></asp:ListItem>
-                        <asp:ListItem Text="Electricity Bills (Assignment 2)" Value="ElectricityBills"></asp:ListItem>
-                        <asp:ListItem Text="Screen Time Logs (Assignment 1)" Value="ScreenTimeLogs"></asp:ListItem>
+                        <asp:ListItem Text="Electricity Bills" Value="ElectricityBills"></asp:ListItem>
+                        <asp:ListItem Text="Screen Time Logs" Value="ScreenTimeLogs"></asp:ListItem>
                         <asp:ListItem Text="Products Table (Tailstore Catalog)" Value="Products"></asp:ListItem>
                     </asp:DropDownList>
                 </div>
@@ -39,8 +39,8 @@
 
             <!-- View 1: USERS TABLE GRIDVIEW -->
             <asp:Panel ID="pnlUsers" runat="server" Visible="true">
-                <div class="bg-white rounded-2xl shadow-md border border-gray-200 p-8">
-                    <div class="flex justify-between items-center mb-6 pb-4 border-b border-gray-100">
+                <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-5">
+                    <div class="flex justify-between items-center mb-4 pb-3 border-b border-gray-100">
                         <div>
                             <h3 class="text-xl font-bold text-gray-900 flex items-center">
                                 <i class="fa-solid fa-users text-primary mr-2"></i> Registered Users Table (Users)
@@ -57,25 +57,25 @@
                             CssClass="min-w-full text-left text-sm border-collapse"
                             GridLines="None" EmptyDataText="No users found in database."
                             AllowPaging="True" PageSize="5" OnPageIndexChanging="gvUsers_PageIndexChanging">
-                            <HeaderStyle CssClass="bg-gray-dark text-white font-bold py-3 px-4 text-xs uppercase tracking-wider" />
-                            <RowStyle CssClass="border-b border-gray-200 hover:bg-gray-50 py-3 px-4" />
-                            <AlternatingRowStyle CssClass="bg-gray-50/50 border-b border-gray-200 hover:bg-gray-100 py-3 px-4" />
-                            <PagerStyle CssClass="py-3 px-4 text-center font-bold space-x-2 text-primary" />
+                            <HeaderStyle CssClass="bg-gray-dark text-white font-bold py-2.5 px-3 text-xs uppercase tracking-wider" />
+                            <RowStyle CssClass="border-b border-gray-200 hover:bg-gray-50 py-2.5 px-3" />
+                            <AlternatingRowStyle CssClass="bg-gray-50/50 border-b border-gray-200 hover:bg-gray-100 py-2.5 px-3" />
+                            <PagerStyle CssClass="py-2.5 px-3 text-center font-bold space-x-2 text-primary" />
                             <Columns>
-                                <asp:BoundField DataField="UserId" HeaderText="ID" ItemStyle-CssClass="py-3 px-4 font-mono font-semibold" />
-                                <asp:BoundField DataField="Username" HeaderText="Username" ItemStyle-CssClass="py-3 px-4 font-bold text-gray-900" />
-                                <asp:BoundField DataField="FullName" HeaderText="Full Name" ItemStyle-CssClass="py-3 px-4" />
-                                <asp:BoundField DataField="Email" HeaderText="Email Address" ItemStyle-CssClass="py-3 px-4 text-gray-600" />
-                                <asp:BoundField DataField="Mobile" HeaderText="Mobile" ItemStyle-CssClass="py-3 px-4 text-gray-600" />
+                                <asp:BoundField DataField="UserId" HeaderText="ID" ItemStyle-CssClass="py-2.5 px-3 font-mono font-semibold" />
+                                <asp:BoundField DataField="Username" HeaderText="Username" ItemStyle-CssClass="py-2.5 px-3 font-bold text-gray-900" />
+                                <asp:BoundField DataField="FullName" HeaderText="Full Name" ItemStyle-CssClass="py-2.5 px-3" />
+                                <asp:BoundField DataField="Email" HeaderText="Email Address" ItemStyle-CssClass="py-2.5 px-3 text-gray-600" />
+                                <asp:BoundField DataField="Mobile" HeaderText="Mobile" ItemStyle-CssClass="py-2.5 px-3 text-gray-600" />
                                 <asp:TemplateField HeaderText="Role">
                                     <ItemTemplate>
                                         <span class='<%# GetRoleBadgeClass(Eval("Role").ToString()) %>'>
                                             <%# Eval("Role") %>
                                         </span>
                                     </ItemTemplate>
-                                    <ItemStyle CssClass="py-3 px-4" />
+                                    <ItemStyle CssClass="py-2.5 px-3" />
                                 </asp:TemplateField>
-                                <asp:BoundField DataField="CreatedAt" HeaderText="Registered On" DataFormatString="{0:dd-MMM-yyyy HH:mm}" ItemStyle-CssClass="py-3 px-4 text-gray-500 text-xs" />
+                                <asp:BoundField DataField="CreatedAt" HeaderText="Registered On" DataFormatString="{0:dd-MMM-yyyy HH:mm}" ItemStyle-CssClass="py-2.5 px-3 text-gray-500 text-xs" />
                             </Columns>
                         </asp:GridView>
                     </div>
@@ -84,13 +84,13 @@
 
             <!-- View 2: ELECTRICITY BILLS GRIDVIEW -->
             <asp:Panel ID="pnlBills" runat="server" Visible="false">
-                <div class="bg-white rounded-2xl shadow-md border border-gray-200 p-8">
-                    <div class="flex justify-between items-center mb-6 pb-4 border-b border-gray-100">
+                <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-5">
+                    <div class="flex justify-between items-center mb-4 pb-3 border-b border-gray-100">
                         <div>
                             <h3 class="text-xl font-bold text-gray-900 flex items-center">
                                 <i class="fa-solid fa-bolt text-amber-500 mr-2"></i> Electricity Bills Table (ElectricityBills)
                             </h3>
-                            <p class="text-xs text-gray-500 mt-1">Calculations computed via progressive tariffs and GST slabs (Assignment 2)</p>
+                            <p class="text-xs text-gray-500 mt-1">Saved bill calculations and GST details</p>
                         </div>
                         <a href="ElectricityBill.aspx" class="text-xs text-primary font-bold hover:underline">
                             + Calculate New Bill
@@ -102,20 +102,20 @@
                             CssClass="min-w-full text-left text-sm border-collapse"
                             GridLines="None" EmptyDataText="No electricity bill records found."
                             AllowPaging="True" PageSize="5" OnPageIndexChanging="gvBills_PageIndexChanging">
-                            <HeaderStyle CssClass="bg-gray-dark text-white font-bold py-3 px-4 text-xs uppercase tracking-wider" />
-                            <RowStyle CssClass="border-b border-gray-200 hover:bg-gray-50 py-3 px-4" />
-                            <AlternatingRowStyle CssClass="bg-gray-50/50 border-b border-gray-200 hover:bg-gray-100 py-3 px-4" />
-                            <PagerStyle CssClass="py-3 px-4 text-center font-bold space-x-2 text-primary" />
+                            <HeaderStyle CssClass="bg-gray-dark text-white font-bold py-2.5 px-3 text-xs uppercase tracking-wider" />
+                            <RowStyle CssClass="border-b border-gray-200 hover:bg-gray-50 py-2.5 px-3" />
+                            <AlternatingRowStyle CssClass="bg-gray-50/50 border-b border-gray-200 hover:bg-gray-100 py-2.5 px-3" />
+                            <PagerStyle CssClass="py-2.5 px-3 text-center font-bold space-x-2 text-primary" />
                             <Columns>
-                                <asp:BoundField DataField="BillId" HeaderText="Bill ID" ItemStyle-CssClass="py-3 px-4 font-mono font-semibold" />
-                                <asp:BoundField DataField="CustomerId" HeaderText="Customer ID" ItemStyle-CssClass="py-3 px-4 font-semibold text-primary" />
-                                <asp:BoundField DataField="CustomerName" HeaderText="Customer Name" ItemStyle-CssClass="py-3 px-4 font-semibold" />
-                                <asp:BoundField DataField="UnitsConsumed" HeaderText="Units" ItemStyle-CssClass="py-3 px-4 font-bold text-center" />
-                                <asp:BoundField DataField="BillBeforeGst" HeaderText="Before GST" DataFormatString="₹ {0:N2}" ItemStyle-CssClass="py-3 px-4" />
-                                <asp:BoundField DataField="GstRate" HeaderText="GST %" DataFormatString="{0:0}%" ItemStyle-CssClass="py-3 px-4 text-center" />
-                                <asp:BoundField DataField="GstAmount" HeaderText="GST Amount" DataFormatString="₹ {0:N2}" ItemStyle-CssClass="py-3 px-4" />
-                                <asp:BoundField DataField="TotalAmount" HeaderText="Total Payable" DataFormatString="₹ {0:N2}" ItemStyle-CssClass="py-3 px-4 font-bold text-amber-700" />
-                                <asp:BoundField DataField="CalculatedAt" HeaderText="Date" DataFormatString="{0:dd-MMM-yyyy}" ItemStyle-CssClass="py-3 px-4 text-gray-500 text-xs" />
+                                <asp:BoundField DataField="BillId" HeaderText="Bill ID" ItemStyle-CssClass="py-2.5 px-3 font-mono font-semibold" />
+                                <asp:BoundField DataField="CustomerId" HeaderText="Customer ID" ItemStyle-CssClass="py-2.5 px-3 font-semibold text-primary" />
+                                <asp:BoundField DataField="CustomerName" HeaderText="Customer Name" ItemStyle-CssClass="py-2.5 px-3 font-semibold" />
+                                <asp:BoundField DataField="UnitsConsumed" HeaderText="Units" ItemStyle-CssClass="py-2.5 px-3 font-bold text-center" />
+                                <asp:BoundField DataField="BillBeforeGst" HeaderText="Before GST" DataFormatString="₹ {0:N2}" ItemStyle-CssClass="py-2.5 px-3" />
+                                <asp:BoundField DataField="GstRate" HeaderText="GST %" DataFormatString="{0:0}%" ItemStyle-CssClass="py-2.5 px-3 text-center" />
+                                <asp:BoundField DataField="GstAmount" HeaderText="GST Amount" DataFormatString="₹ {0:N2}" ItemStyle-CssClass="py-2.5 px-3" />
+                                <asp:BoundField DataField="TotalAmount" HeaderText="Total Payable" DataFormatString="₹ {0:N2}" ItemStyle-CssClass="py-2.5 px-3 font-bold text-amber-700" />
+                                <asp:BoundField DataField="CalculatedAt" HeaderText="Date" DataFormatString="{0:dd-MMM-yyyy}" ItemStyle-CssClass="py-2.5 px-3 text-gray-500 text-xs" />
                             </Columns>
                         </asp:GridView>
                     </div>
@@ -124,13 +124,13 @@
 
             <!-- View 3: SCREEN TIME LOGS GRIDVIEW -->
             <asp:Panel ID="pnlScreenTime" runat="server" Visible="false">
-                <div class="bg-white rounded-2xl shadow-md border border-gray-200 p-8">
-                    <div class="flex justify-between items-center mb-6 pb-4 border-b border-gray-100">
+                <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-5">
+                    <div class="flex justify-between items-center mb-4 pb-3 border-b border-gray-100">
                         <div>
                             <h3 class="text-xl font-bold text-gray-900 flex items-center">
                                 <i class="fa-brands fa-instagram text-pink-500 mr-2"></i> Instagram Screen Time Logs (ScreenTimeLogs)
                             </h3>
-                            <p class="text-xs text-gray-500 mt-1">History of user usage evaluations and wellbeing categories (Assignment 1)</p>
+                            <p class="text-xs text-gray-500 mt-1">Saved screen time reviews and usage categories</p>
                         </div>
                         <a href="ScreenTime.aspx" class="text-xs text-primary font-bold hover:underline">
                             + Analyze New Usage
@@ -142,16 +142,16 @@
                             CssClass="min-w-full text-left text-sm border-collapse"
                             GridLines="None" EmptyDataText="No screen time logs found."
                             AllowPaging="True" PageSize="5" OnPageIndexChanging="gvScreenTime_PageIndexChanging">
-                            <HeaderStyle CssClass="bg-gray-dark text-white font-bold py-3 px-4 text-xs uppercase tracking-wider" />
-                            <RowStyle CssClass="border-b border-gray-200 hover:bg-gray-50 py-3 px-4" />
-                            <AlternatingRowStyle CssClass="bg-gray-50/50 border-b border-gray-200 hover:bg-gray-100 py-3 px-4" />
-                            <PagerStyle CssClass="py-3 px-4 text-center font-bold space-x-2 text-primary" />
+                            <HeaderStyle CssClass="bg-gray-dark text-white font-bold py-2.5 px-3 text-xs uppercase tracking-wider" />
+                            <RowStyle CssClass="border-b border-gray-200 hover:bg-gray-50 py-2.5 px-3" />
+                            <AlternatingRowStyle CssClass="bg-gray-50/50 border-b border-gray-200 hover:bg-gray-100 py-2.5 px-3" />
+                            <PagerStyle CssClass="py-2.5 px-3 text-center font-bold space-x-2 text-primary" />
                             <Columns>
-                                <asp:BoundField DataField="LogId" HeaderText="Log ID" ItemStyle-CssClass="py-3 px-4 font-mono font-semibold" />
-                                <asp:BoundField DataField="Username" HeaderText="User" ItemStyle-CssClass="py-3 px-4 font-semibold" />
-                                <asp:BoundField DataField="ScreenTimeHours" HeaderText="Hours" DataFormatString="{0:0.##} hrs" ItemStyle-CssClass="py-3 px-4" />
-                                <asp:BoundField DataField="UsageCategory" HeaderText="Usage Category" ItemStyle-CssClass="py-3 px-4 font-bold" />
-                                <asp:BoundField DataField="RecordedAt" HeaderText="Timestamp" DataFormatString="{0:dd-MMM-yyyy HH:mm}" ItemStyle-CssClass="py-3 px-4 text-gray-500 text-xs" />
+                                <asp:BoundField DataField="LogId" HeaderText="Log ID" ItemStyle-CssClass="py-2.5 px-3 font-mono font-semibold" />
+                                <asp:BoundField DataField="Username" HeaderText="User" ItemStyle-CssClass="py-2.5 px-3 font-semibold" />
+                                <asp:BoundField DataField="ScreenTimeHours" HeaderText="Hours" DataFormatString="{0:0.##} hrs" ItemStyle-CssClass="py-2.5 px-3" />
+                                <asp:BoundField DataField="UsageCategory" HeaderText="Usage Category" ItemStyle-CssClass="py-2.5 px-3 font-bold" />
+                                <asp:BoundField DataField="RecordedAt" HeaderText="Timestamp" DataFormatString="{0:dd-MMM-yyyy HH:mm}" ItemStyle-CssClass="py-2.5 px-3 text-gray-500 text-xs" />
                             </Columns>
                         </asp:GridView>
                     </div>
@@ -160,8 +160,8 @@
 
             <!-- View 4: PRODUCTS TABLE GRIDVIEW -->
             <asp:Panel ID="pnlProducts" runat="server" Visible="false">
-                <div class="bg-white rounded-2xl shadow-md border border-gray-200 p-8">
-                    <div class="flex justify-between items-center mb-6 pb-4 border-b border-gray-100">
+                <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-5">
+                    <div class="flex justify-between items-center mb-4 pb-3 border-b border-gray-100">
                         <div>
                             <h3 class="text-xl font-bold text-gray-900 flex items-center">
                                 <i class="fa-solid fa-shirt text-blue-500 mr-2"></i> Products Catalog Table (Products)
@@ -178,17 +178,17 @@
                             CssClass="min-w-full text-left text-sm border-collapse"
                             GridLines="None" EmptyDataText="No products in database."
                             AllowPaging="True" PageSize="5" OnPageIndexChanging="gvProducts_PageIndexChanging">
-                            <HeaderStyle CssClass="bg-gray-dark text-white font-bold py-3 px-4 text-xs uppercase tracking-wider" />
-                            <RowStyle CssClass="border-b border-gray-200 hover:bg-gray-50 py-3 px-4" />
-                            <AlternatingRowStyle CssClass="bg-gray-50/50 border-b border-gray-200 hover:bg-gray-100 py-3 px-4" />
-                            <PagerStyle CssClass="py-3 px-4 text-center font-bold space-x-2 text-primary" />
+                            <HeaderStyle CssClass="bg-gray-dark text-white font-bold py-2.5 px-3 text-xs uppercase tracking-wider" />
+                            <RowStyle CssClass="border-b border-gray-200 hover:bg-gray-50 py-2.5 px-3" />
+                            <AlternatingRowStyle CssClass="bg-gray-50/50 border-b border-gray-200 hover:bg-gray-100 py-2.5 px-3" />
+                            <PagerStyle CssClass="py-2.5 px-3 text-center font-bold space-x-2 text-primary" />
                             <Columns>
-                                <asp:BoundField DataField="ProductId" HeaderText="Product ID" ItemStyle-CssClass="py-3 px-4 font-mono font-semibold" />
-                                <asp:BoundField DataField="ProductName" HeaderText="Product Name" ItemStyle-CssClass="py-3 px-4 font-bold text-gray-900" />
-                                <asp:BoundField DataField="Category" HeaderText="Category" ItemStyle-CssClass="py-3 px-4" />
-                                <asp:BoundField DataField="Price" HeaderText="Price" DataFormatString="${0:0.00}" ItemStyle-CssClass="py-3 px-4 font-bold text-primary" />
-                                <asp:BoundField DataField="OriginalPrice" HeaderText="Original Price" DataFormatString="${0:0.00}" ItemStyle-CssClass="py-3 px-4 text-gray-400" />
-                                <asp:BoundField DataField="Description" HeaderText="Description" ItemStyle-CssClass="py-3 px-4 text-xs text-gray-600" />
+                                <asp:BoundField DataField="ProductId" HeaderText="Product ID" ItemStyle-CssClass="py-2.5 px-3 font-mono font-semibold" />
+                                <asp:BoundField DataField="ProductName" HeaderText="Product Name" ItemStyle-CssClass="py-2.5 px-3 font-bold text-gray-900" />
+                                <asp:BoundField DataField="Category" HeaderText="Category" ItemStyle-CssClass="py-2.5 px-3" />
+                                <asp:BoundField DataField="Price" HeaderText="Price" DataFormatString="${0:0.00}" ItemStyle-CssClass="py-2.5 px-3 font-bold text-primary" />
+                                <asp:BoundField DataField="OriginalPrice" HeaderText="Original Price" DataFormatString="${0:0.00}" ItemStyle-CssClass="py-2.5 px-3 text-gray-400" />
+                                <asp:BoundField DataField="Description" HeaderText="Description" ItemStyle-CssClass="py-2.5 px-3 text-xs text-gray-600" />
                             </Columns>
                         </asp:GridView>
                     </div>

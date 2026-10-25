@@ -40,12 +40,13 @@ namespace ShopSphere
                 Session["Username"] = verifiedUsername;
                 Session["FullName"] = fullName;
                 Session["Role"] = role;
+                Session["FlashMessage"] = "Login successful.";
                 Response.Redirect("~/Default.aspx", false);
                 Context.ApplicationInstance.CompleteRequest();
             }
             else
             {
-                // Assignment requirement: "Any other Any other -> Invalid Username or Password"
+                // Use a generic message for invalid credentials.
                 ShowErrorMessage("Invalid Username or Password");
             }
         }

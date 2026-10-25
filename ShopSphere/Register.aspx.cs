@@ -1,4 +1,5 @@
 using System;
+using System.Text.RegularExpressions;
 using System.Web.UI;
 using ShopSphere.Helpers;
 
@@ -8,6 +9,11 @@ namespace ShopSphere
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            txtMobile.Attributes["inputmode"] = "numeric";
+            txtMobile.Attributes["pattern"] = "[0-9]{10}";
+            txtMobile.Attributes["title"] = "Enter exactly 10 digits.";
+            txtMobile.Attributes["required"] = "required";
+
             if (!IsPostBack)
             {
                 pnlMessage.Visible = false;
@@ -25,10 +31,16 @@ namespace ShopSphere
             string selectedRole = ddlRole.SelectedValue;
 
             // Form Validation
-            if (string.IsNullOrEmpty(fullName) || string.IsNullOrEmpty(username) || 
-                string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password))
+            if (string.IsNullOrEmpty(fullName) || string.IsNullOrEmpty(username) ||
+                string.IsNullOrEmpty(email) || string.IsNullOrEmpty(mobile) || string.IsNullOrEmpty(password))
             {
-                ShowErrorMessage("Please fill in all required fields (Name, Username, Email, Password).");
+                ShowErrorMessage("Please complete all required fields.");
+                return;
+            }
+
+            if (!Regex.IsMatch(mobile, @"\A[0-9]{10}\z"))
+            {
+                ShowErrorMessage("Mobile number must contain exactly 10 digits (0–9).");
                 return;
             }
 
@@ -44,37 +56,27 @@ namespace ShopSphere
                 return;
             }
 
+            selectedRole = string.Equals(selectedRole, "Customer", StringComparison.OrdinalIgnoreCase)
+                ? "Customer"
+                : "Student";
+
             // Register into SQL Server database
             string error;
             bool success = DbHelper.RegisterUser(username, fullName, email, mobile, password, selectedRole, out error);
 
             if (success)
             {
-                ShowSuccessMessage(string.Format("Registration successful for '{0}' as {1}! You can now log in.", username, selectedRole));
-                ClearForm();
+                Session["Username"] = username;
+                Session["FullName"] = fullName;
+                Session["Role"] = selectedRole;
+                Session["FlashMessage"] = "Registration successful. You are now signed in.";
+                Response.Redirect("~/Default.aspx", false);
+                Context.ApplicationInstance.CompleteRequest();
             }
             else
             {
                 ShowErrorMessage(error);
             }
-        }
-
-        private void ClearForm()
-        {
-            txtFullName.Text = string.Empty;
-            txtUsername.Text = string.Empty;
-            txtEmail.Text = string.Empty;
-            txtMobile.Text = string.Empty;
-            txtPassword.Text = string.Empty;
-            txtConfirmPassword.Text = string.Empty;
-        }
-
-        private void ShowSuccessMessage(string message)
-        {
-            pnlMessage.Visible = true;
-            lblMessage.Text = message;
-            divAlertBox.Attributes["class"] = "px-4 py-3 rounded-xl border flex items-center space-x-3 text-sm bg-green-50 border-green-200 text-green-800";
-            iconAlert.Attributes["class"] = "fa-solid fa-circle-check text-green-600 text-base";
         }
 
         private void ShowErrorMessage(string message)
