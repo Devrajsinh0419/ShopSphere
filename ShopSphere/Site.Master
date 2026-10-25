@@ -39,66 +39,68 @@
         </asp:ScriptManager>
 
         <!-- Header / Navigation Bar -->
-        <header class="bg-gray-dark sticky top-0 z-50 shadow-md">
-            <div class="container mx-auto flex justify-between items-center py-4 px-4 sm:px-6">
-                <!-- Left Section: Logo -->
-                <a runat="server" href="~/Default.aspx" class="flex items-center space-x-2">
-                    <img runat="server" src="~/assets/images/template-white-logo.png" alt="ShopSphere Logo" class="h-12 w-auto" />
-                </a>
+        <header class="bg-gray-dark sticky top-0 z-50 shadow-lg border-b border-gray-800">
+            <div class="container mx-auto flex justify-between items-center py-4 px-4 sm:px-6 lg:px-8 site-header-layout">
+                <!-- Left Section: Logo with proper right margin -->
+                <div class="flex items-center shrink-0 mr-6 xl:mr-10 site-header-brand">
+                    <a runat="server" href="~/Default.aspx" class="flex items-center group">
+                        <img runat="server" src="~/assets/images/template-white-logo.png" alt="ShopSphere Logo" class="h-9 w-auto transition-transform group-hover:scale-105" />
+                    </a>
+                </div>
 
                 <!-- Hamburger Menu Button (Mobile) -->
-                <div class="flex lg:hidden">
-                    <button type="button" id="hamburger" class="text-white focus:outline-none p-2 rounded hover:bg-gray-800" aria-label="Toggle Navigation">
+                <div class="flex lg:hidden site-header-toggle">
+                    <button type="button" id="hamburger" class="text-white focus:outline-none p-2 rounded-lg hover:bg-gray-800 transition" aria-label="Toggle Navigation">
                         <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
                         </svg>
                     </button>
                 </div>
 
-                <!-- Center Section: Main Menu Links -->
-                <nav class="hidden lg:flex md:flex-grow justify-center">
-                    <ul class="flex justify-center space-x-6 text-white text-sm font-semibold tracking-wide">
-                        <li><a runat="server" href="~/Default.aspx" class="hover:text-primary transition-colors py-2">Home</a></li>
-                        <li><a runat="server" href="~/Shop.aspx" class="hover:text-primary transition-colors py-2">Shop</a></li>
-                        <li><a runat="server" href="~/ScreenTime.aspx" class="hover:text-primary transition-colors py-2">Instagram Analyzer</a></li>
-                        <li><a runat="server" href="~/ElectricityBill.aspx" class="hover:text-primary transition-colors py-2">Electricity Bill</a></li>
-                        <li><a runat="server" href="~/Records.aspx" class="hover:text-primary transition-colors py-2">Database Records (GridView)</a></li>
-                        <li><a runat="server" href="~/Error404.aspx" class="hover:text-primary transition-colors py-2">404 Page</a></li>
+                <!-- Center Section: Main Navigation Links with Generous Spacing -->
+                <nav class="hidden lg:flex items-center justify-center flex-1 mx-4 xl:mx-8 site-header-nav">
+                    <ul class="flex items-center justify-center text-white text-sm font-semibold tracking-wide">
+                        <li><a runat="server" href="~/Default.aspx" class="px-3.5 py-2 rounded-full hover:bg-white/10 hover:text-primary transition-all">Home</a></li>
+                        <li><a runat="server" href="~/Shop.aspx" class="px-3.5 py-2 rounded-full hover:bg-white/10 hover:text-primary transition-all">Shop</a></li>
+                        <li><a runat="server" href="~/ScreenTime.aspx" class="px-3.5 py-2 rounded-full hover:bg-white/10 hover:text-primary transition-all">Instagram Analyzer</a></li>
+                        <li><a runat="server" href="~/ElectricityBill.aspx" class="px-3.5 py-2 rounded-full hover:bg-white/10 hover:text-primary transition-all">Electricity Bill</a></li>
+                        <li><a runat="server" href="~/Records.aspx" class="px-3.5 py-2 rounded-full hover:bg-white/10 hover:text-primary transition-all">Records (GridView)</a></li>
+                        <li><a runat="server" href="~/Error404.aspx" class="px-3.5 py-2 rounded-full hover:bg-white/10 hover:text-primary transition-all">404 Page</a></li>
                     </ul>
                 </nav>
 
-                <!-- Right Section: Auth & Role Info -->
-                <div class="hidden lg:flex items-center space-x-3 text-sm">
+                <!-- Right Section: Auth & Role Info with Clean Separation -->
+                <div class="hidden lg:flex items-center shrink-0 text-sm site-header-auth">
                     <% if (Session["Username"] != null) { %>
-                        <div class="flex items-center space-x-2 bg-gray-900 border border-gray-700 text-white px-3 py-1.5 rounded-full">
+                        <div class="flex items-center space-x-2.5 bg-gray-900 border border-gray-700 text-white px-3.5 py-1.5 rounded-full shadow-inner">
                             <i class="fa-solid fa-user-circle text-primary text-base"></i>
                             <span class="font-medium"><%= Session["Username"] %></span>
                             <span class="bg-primary text-white text-xs px-2 py-0.5 rounded-full font-bold uppercase"><%= Session["Role"] %></span>
                         </div>
-                        <a runat="server" href="~/Logout.aspx" class="bg-red-600 border border-red-600 hover:bg-transparent text-white hover:text-red-400 font-semibold px-4 py-2 rounded-full transition-all">Logout</a>
+                        <a runat="server" href="~/Logout.aspx" class="bg-red-600 border border-red-600 hover:bg-transparent text-white hover:text-red-400 font-semibold px-5 py-2 rounded-full transition-all shadow">Logout</a>
                     <% } else { %>
-                        <a runat="server" href="~/Register.aspx" class="bg-transparent border border-primary text-white hover:bg-primary font-semibold px-4 py-2 rounded-full transition-all">Register</a>
-                        <a runat="server" href="~/Login.aspx" class="bg-primary border border-primary hover:bg-transparent text-white hover:text-primary font-semibold px-4 py-2 rounded-full transition-all">Login</a>
+                        <a runat="server" href="~/Register.aspx" class="bg-transparent border border-primary text-white hover:bg-primary font-semibold px-5 py-2 rounded-full transition-all">Register</a>
+                        <a runat="server" href="~/Login.aspx" class="bg-primary border border-primary hover:bg-transparent text-white hover:text-primary font-semibold px-5 py-2 rounded-full transition-all shadow">Login</a>
                     <% } %>
                 </div>
             </div>
 
-            <!-- Mobile Navigation Drawer -->
-            <div id="mobile-menu" class="mobile-menu hidden lg:hidden bg-gray-900 text-white px-6 py-4 border-t border-gray-800">
-                <ul class="flex flex-col space-y-3 font-semibold">
-                    <li><a runat="server" href="~/Default.aspx" class="block hover:text-primary py-1">Home</a></li>
-                    <li><a runat="server" href="~/Shop.aspx" class="block hover:text-primary py-1">Shop</a></li>
-                    <li><a runat="server" href="~/ScreenTime.aspx" class="block hover:text-primary py-1">Instagram Analyzer</a></li>
-                    <li><a runat="server" href="~/ElectricityBill.aspx" class="block hover:text-primary py-1">Electricity Bill</a></li>
-                    <li><a runat="server" href="~/Records.aspx" class="block hover:text-primary py-1">Database Records (GridView)</a></li>
-                    <li><a runat="server" href="~/Error404.aspx" class="block hover:text-primary py-1">404 Page</a></li>
-                    <li class="pt-2 border-t border-gray-800 flex flex-col space-y-2">
+            <!-- Mobile Navigation Drawer with Comfortable Tap Spacing -->
+            <div id="mobile-menu" class="mobile-menu hidden lg:hidden bg-gray-900 text-white px-6 py-5 border-t border-gray-800">
+                <ul class="flex flex-col space-y-2 font-semibold text-sm">
+                    <li><a runat="server" href="~/Default.aspx" class="block px-3 py-2 rounded-lg hover:bg-gray-800 hover:text-primary transition">Home</a></li>
+                    <li><a runat="server" href="~/Shop.aspx" class="block px-3 py-2 rounded-lg hover:bg-gray-800 hover:text-primary transition">Shop</a></li>
+                    <li><a runat="server" href="~/ScreenTime.aspx" class="block px-3 py-2 rounded-lg hover:bg-gray-800 hover:text-primary transition">Instagram Analyzer</a></li>
+                    <li><a runat="server" href="~/ElectricityBill.aspx" class="block px-3 py-2 rounded-lg hover:bg-gray-800 hover:text-primary transition">Electricity Bill</a></li>
+                    <li><a runat="server" href="~/Records.aspx" class="block px-3 py-2 rounded-lg hover:bg-gray-800 hover:text-primary transition">Database Records (GridView)</a></li>
+                    <li><a runat="server" href="~/Error404.aspx" class="block px-3 py-2 rounded-lg hover:bg-gray-800 hover:text-primary transition">404 Page</a></li>
+                    <li class="pt-3 mt-2 border-t border-gray-800 flex flex-col space-y-2.5">
                         <% if (Session["Username"] != null) { %>
-                            <div class="text-sm text-gray-300">Signed in as <b><%= Session["Username"] %></b> (<%= Session["Role"] %>)</div>
-                            <a runat="server" href="~/Logout.aspx" class="bg-red-600 text-center text-white py-2 rounded-full font-semibold">Logout</a>
+                            <div class="text-xs text-gray-300 px-3 py-1">Signed in as <b><%= Session["Username"] %></b> (<%= Session["Role"] %>)</div>
+                            <a runat="server" href="~/Logout.aspx" class="bg-red-600 text-center text-white py-2.5 rounded-full font-semibold">Logout</a>
                         <% } else { %>
-                            <a runat="server" href="~/Login.aspx" class="bg-primary text-center text-white py-2 rounded-full font-semibold">Login</a>
-                            <a runat="server" href="~/Register.aspx" class="border border-primary text-center text-white py-2 rounded-full font-semibold">Register</a>
+                            <a runat="server" href="~/Login.aspx" class="bg-primary text-center text-white py-2.5 rounded-full font-semibold shadow">Login</a>
+                            <a runat="server" href="~/Register.aspx" class="border border-primary text-center text-white py-2.5 rounded-full font-semibold">Register</a>
                         <% } %>
                     </li>
                 </ul>

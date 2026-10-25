@@ -17,6 +17,79 @@ button:hover {
     padding: 2rem;
 }
 
+/* Keep the full header in one row only while there is room for every section. */
+.site-header-layout {
+    gap: 1.5rem;
+}
+
+.site-header-brand,
+.site-header-toggle,
+.site-header-auth {
+    flex: 0 0 auto;
+}
+
+.site-header-nav {
+    min-width: 0;
+    margin-inline: 1rem;
+}
+
+.site-header-nav ul {
+    flex-wrap: nowrap;
+    gap: 1.25rem;
+    white-space: nowrap;
+}
+
+.site-header-nav a {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.6rem 0.25rem;
+}
+
+.site-header-auth {
+    gap: 1rem;
+    margin-left: 1.5rem;
+}
+
+.site-header-auth > a {
+    padding-inline: 1.25rem;
+    white-space: nowrap;
+}
+
+.site-header-nav li,
+.site-header-nav a {
+    flex: 0 0 auto;
+}
+
+@media (min-width: 1280px) {
+    .site-header-layout {
+        gap: 2rem;
+    }
+
+    .site-header-nav ul {
+        gap: 1.5rem;
+    }
+
+    .site-header-auth {
+        gap: 1.25rem;
+        margin-left: 2rem;
+    }
+}
+
+@media (max-width: 1279px) {
+    .site-header-layout {
+        justify-content: space-between;
+    }
+
+    .site-header-nav,
+    .site-header-auth {
+        display: none !important;
+    }
+
+    .site-header-toggle {
+        display: flex !important;
+    }
+}
+
 .dropdown-enter-active,
 .dropdown-leave-active {
     transition: opacity 0.1s ease-out, transform 0.1s ease-out;
@@ -32,10 +105,20 @@ button:hover {
     text-align: center;
 }
 
+.mobile-menu ul {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
 .mobile-menu li {
     border-bottom: 1px solid #e0e0e0;
     padding-bottom: 1rem;
     padding-top: 1rem;
+}
+
+.mobile-menu li:last-child {
+    border-bottom: 0;
 }
 
 .mobile-dropdown-menu li{
